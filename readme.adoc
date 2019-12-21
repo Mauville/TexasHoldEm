@@ -4,5 +4,5 @@ A fancy game of Texas Hold'em, done using pure Python and some nice Unicode play
 
 This was inspired by my other previous project, Java Blackjack.
 
-image::%pn_1576940880.gif[]
+image::movie.gif[]
 
