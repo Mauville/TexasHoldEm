@@ -1,0 +1,134 @@
+﻿= Texas Hold'em
+Emily, Paty
+
+// Pseudocodes or flowcharts of each algorithm to code in pdf (10%)
+// Flowchart of the global interaction among all the functions in pdf
+
+
+.Creacion de una baraja
+[source, python]
+--
+fun getDeck():
+
+    cards = [] 
+    dictCards = []
+    suits = []
+    suitchange = 0
+    value = 0
+    for i in range(0, 52):
+        if i == 12 or i == 25 or i == 38:
+            suitchange += 1
+            value = 0
+
+    # Se crea un diccionario en cada carta. Cada carta cuenta con palo, valor relativo (0 13), valor absoluto (0,51) y una representacion en String de la carta.
+        card = {
+            "value": value,
+            "sort_value": i,
+            "suit": suits[suitchange],
+            "face": cards[i]
+        }
+        dictCards.append(card)
+        value += 1
+    return dictCards
+end fun
+--
+
+.Barajeo
+[source, python]
+--
+# No es necesario barajear una baraja, ya que las cartas se reparten
+al azar.
+
+fun getcards(hand, amount, dictCards):
+    for (i) in range(0, amount):
+        toget = random.randint(0, len(dictCards) - 1)
+        hand.append(dictCards.pop(toget))
+    return hand
+
+--
+
+.Decidir el ganador de una partida
+[source, python]
+--
+fun getresult(hand):
+    sorthand = hand.sort()
+    nums = getsortedlist(hand, "sort_value")
+
+    # straight flush
+    if straight(nums) and samesuit(hand):
+        # royal flush
+        if sorthand[0] == 9 and sorthand[4] == 13:
+            return 100
+        else:
+            return 90
+
+    if poker(sorthand):
+        return 80
+    if full(sorthand):
+        return 70
+    if samesuit(hand):
+        return 60
+    if straight(nums):
+        return 50
+    if three(sorthand)[0]:
+        return 40
+    if getpairs(sorthand) == 1:
+        return 30
+    if getpairs(sorthand) == 0:
+        return 20
+
+    return highCheck(sorthand)
+end func
+--
+
+.Game Dynamics
+[source, python]
+--
+
+def round():
+    deck = createdeck()
+    player4hand = getcards(player4hand, 2, deck)
+    getblinds()
+    roundbet()
+    hole = getcards(hole, 3, deck)
+    roundbet()
+    hole = getcards(hole, 1, deck)
+    roundbet()
+    hole = getcards(hole, 1, deck)
+    roundbet()
+    CPUcards()
+    showdown()
+    reset()
+
+def game():
+    while True:
+        round()
+        if input("Another round? Enter for yes, anything else for no. \n") != "":
+            print("Thanks for playing.")
+            break
+
+--
+
+.Interaccion entre todas las funciones
+[plantuml]
+----
+skinparam monochrome true
+skinparam shadowing false
+
+(*) --> "createDeck()"
+"createDeck()" --> "getPlayerCards()"
+"getPlayerCards()" --> "roundBet()"
+"roundBet()"  --> "getcards(Hole)"
+"getcards(Hole)" --> [x5] "roundBet()"
+
+"getcards(Hole)" --> "showdown()"
+
+if "Keep playing" then
+  -->[true] "createDeck()"
+else
+  ->[false] "print(end)"
+  --> (*)
+endif
+----
+
+
