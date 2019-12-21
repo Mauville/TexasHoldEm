@@ -1,13 +1,9 @@
 import random
 
 
-# Deck generation (52 different cards)
-# Deck shuffling
-# Decide the Winner over one match
-
-#TODO
 #  Game dynamics (betting system)
-# o Decide the Winner Globally
+#  Decide the Winner Globally
+
 # Before coding any algorithm, it is necessary to do the pseudocode or the flowchart of each one
 # • It is necessary to do a flowchart indicating the global interaction among all the functions
 
@@ -22,10 +18,8 @@ import random
 # o Total files to deliver: 6
 
 
-
-
-
 def createdeck():
+    '''Create a new deck of cards, (which is a dictionary) from three different arrays, each with a different specification.'''
     cards = ["🂢", "🂣", "🂤", "🂥", "🂦", "🂧", "🂨", "🂩", "🂪", "🂫", "🂭", "🂮", "🂡", "🂲", "🂳", "🂴", "🂵", "🂶",
              "🂷", "🂸", "🂹", "🂺", "🂻", "🂽", "🂾", "🂱", "🃂", "🃃", "🃄", "🃅", "🃆", "🃇", "🃈", "🃉", "🃊", "🃋",
              "🃍", "🃎", "🃁", "🃒", "🃓", "🃔", "🃕", "🃖", "🃗", "🃘", "🃙", "🃚", "🃛", "🃝", "🃞", "🃑"]
@@ -49,9 +43,9 @@ def createdeck():
     return dictCards
 
 
-def shuffledeck(hand):
-    random.shuffle(hand)
-    return hand
+# def shuffledeck(hand):
+#     random.shuffle(hand)
+#     return hand
 
 
 def sortcards(hand):
@@ -201,7 +195,7 @@ def getresult(hand):
 
 
 def getdummy(hand):
-    for i in range (0,2):
+    for i in range(0, 2):
         hand.append(
             {
                 "value": -1,
@@ -212,6 +206,3 @@ def getdummy(hand):
 
         )
     return hand
-
-
-
